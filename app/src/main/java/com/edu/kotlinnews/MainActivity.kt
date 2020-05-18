@@ -14,6 +14,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edu.kotlinnews.model.ListItem
+import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,13 +41,23 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if(response.isSuccessful){
                     val data=response.body()
-                    if(data!=null){
-                        Log.e(MainActivity::class.java.name,"successfully get data")
+                    if(data==null){
+                        onFailure(call,RuntimeException("Empty result."))
+                        return
                     }
+                    var realData:JsonElement=data.get("data");//get data from ListItem
+                    realData=realData.asJsonObject.get("children")//get children-data from data
+
+                    var list=Gson().fromJson<MutableList<ListItem>>(realData,object :TypeToken<MutableList<ListItem>>(){}.type)
 
 
+                }else{
+                    onFailure(call,RuntimeException("No response"))
                 }
             }
+
+
+
         })
 
     }
