@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.edu.kotlinnews.model.Data
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -20,7 +21,9 @@ class DetailsActivity : AppCompatActivity() {
         val data=Gson().fromJson(intent.getStringExtra("data"), Data::class.java)
         title=data.title
 
+
         var img=data.thumbnail
+        var selftext=data.selftext
 
         if(img==null||img.trim().isEmpty()){
             thumbnail_iv.visibility= View.GONE
@@ -30,8 +33,13 @@ class DetailsActivity : AppCompatActivity() {
 
         }
         //todo fix if there is no selftext
-        content_tv.text=data.selftext
 
+        if (selftext==null||selftext.trim().isEmpty()){
+            content_tv.text=data.url
+            Toast.makeText(this,"No selftext, showing the url instead",Toast.LENGTH_SHORT).show()
+        }else {
+            content_tv.text = data.selftext
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
