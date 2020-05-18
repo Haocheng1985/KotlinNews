@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        title="Kotlin News"
-        article_rv.layoutManager=LinearLayoutManager(this)
+        title="Kotlin News"//set title
+        article_rv.layoutManager=LinearLayoutManager(this)//set main page
         articleAdapter= ArticleAdapter()
         article_rv.adapter=articleAdapter
 
@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity() {
                     var realData:JsonElement=data.get("data");//get data from ListItem
                     realData=realData.asJsonObject.get("children")//get children-data from data
 
-                    var list=Gson().fromJson<MutableList<ListItem>>(realData,object :TypeToken<MutableList<ListItem>>(){}.type)
+                    var list=Gson().fromJson<MutableList<ListItem>>(realData,object :TypeToken<MutableList<ListItem>>(){}.type)//json to obj
 
-                    articleAdapter.data=list
+                    articleAdapter.data=list//pass data to recycleview
 
                 }else{
                     onFailure(call,RuntimeException("No response"))

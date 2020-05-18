@@ -18,7 +18,7 @@ import com.google.gson.Gson
 
 class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
-    var data:MutableList<ListItem> = ArrayList()
+    var data:MutableList<ListItem> = ArrayList()//get data from MainActivity
     set(value) {
         data.clear()
         data.addAll(value)
@@ -37,7 +37,7 @@ class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
                 Log.e("Adapter","Item clicked")
 
                 val intent=Intent(it.context,DetailsActivity::class.java)
-                intent.putExtra("data",Gson().toJson(data.data))
+                intent.putExtra("data",Gson().toJson(data.data))//serialize obj to json
                 it.context.startActivity(intent)
 
 
@@ -48,7 +48,7 @@ class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
             this.data=data
             title.setText(data.data.title)
             var img=data.data.thumbnail
-
+            //the ImageView will show depend on if there is thumbnail image
             if (img == null || img.trim().isEmpty()) {
 
                 thumbnail.visibility = View.GONE
@@ -64,7 +64,7 @@ class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder =
         ArticleViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.item_article,
+                R.layout.item_article,//render item_article
                 parent,
                 false
             )

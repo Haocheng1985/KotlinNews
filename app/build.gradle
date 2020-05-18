@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.dokka'
 
 android {
     compileSdkVersion 29
@@ -24,6 +25,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dokka {
+        // html, javadoc,html-as-java, markdown,kotlin-website*
+        outputFormat = 'javadoc'
+        // output dir(app/build/dokka)
+        outputDirectory = "$buildDir/dokka"
+        //
+        configuration {
+            noJdkLink = true
+            noStdlibLink = true
+            noAndroidSdkLink = true
+            skipDeprecated = true // Do not output deprecated members
+            reportUndocumented = true // Emit warnings about not documented members.
+            skipEmptyPackages = true // Do not create index pages for empty packages
+
         }
     }
 
