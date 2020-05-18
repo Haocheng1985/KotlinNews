@@ -1,5 +1,6 @@
 package com.edu.kotlinnews.recycle
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,12 @@ import android.widget.Adapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.edu.kotlinnews.DetailsActivity
 import com.edu.kotlinnews.model.ListItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_article.view.*
 import com.edu.kotlinnews.R
+import com.google.gson.Gson
 
 class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
@@ -32,6 +35,11 @@ class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
             thumbnail=itemView.thumbnail_iv
             itemView.setOnClickListener{
                 Log.e("Adapter","Item clicked")
+
+                val intent=Intent(it.context,DetailsActivity::class.java)
+                intent.putExtra("data",Gson().toJson(data.data))
+                it.context.startActivity(intent)
+
 
             }
         }
