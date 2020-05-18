@@ -15,15 +15,20 @@ import retrofit2.Callback
 import retrofit2.Response
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.kotlinnews.model.ListItem
+import com.edu.kotlinnews.recycle.ArticleAdapter
 import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var articleAdapter: ArticleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         title="Kotlin News"
-
+        article_rv.layoutManager=LinearLayoutManager(this)
+        articleAdapter= ArticleAdapter()
+        article_rv.adapter=articleAdapter
 
 
 
@@ -50,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
                     var list=Gson().fromJson<MutableList<ListItem>>(realData,object :TypeToken<MutableList<ListItem>>(){}.type)
 
+                    articleAdapter.data=list
 
                 }else{
                     onFailure(call,RuntimeException("No response"))
