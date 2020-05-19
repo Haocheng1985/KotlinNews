@@ -12,23 +12,23 @@ import  retrofit2.converter.scalars.ScalarsConverterFactory
  *
  * */
 
-class MainApp:Application() {
+class MainApp : Application() {
 
-    companion object{
+    companion object {
         lateinit var api: RequestApi
     }
 
     override fun onCreate() {
         super.onCreate()
 
-        var ret=Retrofit.Builder().baseUrl(
+        var ret = Retrofit.Builder().baseUrl(
             "https://www.reddit.com/"
 //            "https://www.fastmock.site/"
         ).addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        api=ret.create(RequestApi::class.java)
+        api = ret.create(RequestApi::class.java)
 
     }
 }

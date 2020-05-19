@@ -16,37 +16,38 @@ import kotlinx.android.synthetic.main.item_article.view.*
 import com.edu.kotlinnews.R
 import com.google.gson.Gson
 
-class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
+class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
-    var data:MutableList<ListItem> = ArrayList()//get data from MainActivity
-    set(value) {
-        data.clear()
-        data.addAll(value)
-        notifyDataSetChanged()
-    }
+    var data: MutableList<ListItem> = ArrayList()
+        //get data from MainActivity
+        set(value) {
+            data.clear()
+            data.addAll(value)
+            notifyDataSetChanged()
+        }
 
-    class ArticleViewHolder:RecyclerView.ViewHolder{
-        lateinit var data:ListItem
-        var title:TextView
-        var thumbnail:ImageView
+    class ArticleViewHolder : RecyclerView.ViewHolder {
+        lateinit var data: ListItem
+        var title: TextView
+        var thumbnail: ImageView
 
-        constructor(itemView: View) : super(itemView){
-            title=itemView.title_tv
-            thumbnail=itemView.thumbnail_iv
-            itemView.setOnClickListener{
-                Log.e("Adapter","Item clicked")
+        constructor(itemView: View) : super(itemView) {
+            title = itemView.title_tv
+            thumbnail = itemView.thumbnail_iv
+            itemView.setOnClickListener {
+                Log.e("Adapter", "Item clicked")
 
-                val intent=Intent(it.context,DetailsActivity::class.java)
-                intent.putExtra("data",Gson().toJson(data.data))//serialize obj to json
+                val intent = Intent(it.context, DetailsActivity::class.java)
+                intent.putExtra("data", Gson().toJson(data.data))//serialize obj to json
                 it.context.startActivity(intent)
 
             }
         }
 
-        fun bind(data: ListItem){
-            this.data=data
+        fun bind(data: ListItem) {
+            this.data = data
             title.setText(data.data.title)
-            var img=data.data.thumbnail
+            var img = data.data.thumbnail
             //the ImageView will show depend on if there is thumbnail image
             if (img == null || img.trim().isEmpty()) {
 
@@ -67,7 +68,7 @@ class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
             )
         )
 
-    override fun getItemCount(): Int =data.size
+    override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         holder.bind(data.get(position))

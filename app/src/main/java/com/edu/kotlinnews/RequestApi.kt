@@ -14,6 +14,6 @@ interface RequestApi {
 
     @GET("r/kotlin/.json") //get REST api
 //    @GET("mock/4e55609daf3395eea2df809b041d9164/api/reddit")
-    fun fetchData():Call<JsonObject>
+    fun fetchData(): Call<JsonObject>
 
 }
