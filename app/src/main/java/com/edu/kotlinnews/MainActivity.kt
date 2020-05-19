@@ -1,5 +1,7 @@
 package com.edu.kotlinnews
 
+import android.app.AlertDialog
+import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,12 +35,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        //set progressDialog to show loading
+        val progressDialog=ProgressDialog(this)
+        progressDialog.setTitle("Fetching Data")
+        progressDialog.setMessage("Loading.....")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
         MainApp.api.fetchData().enqueue(object : Callback<JsonObject> {
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Fail to load data.", Toast.LENGTH_SHORT)
-                    .show()//Toast if connect error
+//                Toast.makeText(this@MainActivity, "Fail to load data.", Toast.LENGTH_SHORT).show()//Toast if connect error
                 Log.e(MainActivity::class.java.name, "Error load json", t)
-            }
+                progressDialog.dismiss()
+
+                val dialog=AlertDialog.Builder(this@MainActivity)
+                    .setTitle("Error")
+                    .setMessage("Fail to load data. Please check your network.")
+                    .setPositiveButton("ok"){dialog, which ->{dialog.dismiss()}}.create()
+                dialog.show()
+                    }
 
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
@@ -55,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                     )//json to obj
 
                     articleAdapter.data = list//pass data to recycleview
+                    progressDialog.dismiss()
 
                 } else {
                     onFailure(call, RuntimeException("No response"))
