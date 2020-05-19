@@ -29,10 +29,6 @@ class MainActivity : AppCompatActivity() {
         article_rv.layoutManager=LinearLayoutManager(this)//set main page
         articleAdapter= ArticleAdapter()
         article_rv.adapter=articleAdapter
-
-
-
-
     }
 
     override fun onResume() {
@@ -61,13 +57,7 @@ class MainActivity : AppCompatActivity() {
                     onFailure(call,RuntimeException("No response"))
                 }
             }
-
-
-
         })
 
     }
-
-
-
 }

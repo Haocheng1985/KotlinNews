@@ -10,8 +10,6 @@ import retrofit2.http.GET
  *
  *
  */
-
-
 interface RequestApi {
 
     @GET("r/kotlin/.json") //get REST api

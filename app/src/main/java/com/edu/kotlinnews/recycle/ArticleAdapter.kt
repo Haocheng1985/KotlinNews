@@ -40,7 +40,6 @@ class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
                 intent.putExtra("data",Gson().toJson(data.data))//serialize obj to json
                 it.context.startActivity(intent)
 
-
             }
         }
 
@@ -57,8 +56,6 @@ class ArticleAdapter:RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
                 Picasso.get().load(img.trim()).into(thumbnail)
             }
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder =

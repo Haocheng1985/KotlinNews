@@ -14,6 +14,4 @@ data class Data(
     var title:String,
     var thumbnail:String?,
     var url:String
-
-
 )
