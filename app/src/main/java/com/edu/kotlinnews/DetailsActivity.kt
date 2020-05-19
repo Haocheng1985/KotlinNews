@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import com.edu.kotlinnews.model.Data
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -17,11 +19,19 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        supportActionBar?.displayOptions=ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setCustomView(R.layout.bar_layout)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)//set back button
         val data =
             Gson().fromJson(intent.getStringExtra("data"), Data::class.java)//serialize json to obj
         title = data.title//set title
 
+        val dispTitle = supportActionBar!!.customView!!.findViewById<TextView>(R.id.bar_title)!!
+        dispTitle.text = data.title
+        dispTitle.requestFocus()
+        dispTitle.isSelected = true
 
         var img = data.thumbnail
         var selftext = data.selftext
