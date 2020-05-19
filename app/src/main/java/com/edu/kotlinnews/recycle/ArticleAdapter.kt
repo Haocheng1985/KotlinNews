@@ -1,5 +1,6 @@
 package com.edu.kotlinnews.recycle
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,9 +38,20 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
             itemView.setOnClickListener {
                 Log.e("Adapter", "Item clicked")
 
-                val intent = Intent(it.context, DetailsActivity::class.java)
-                intent.putExtra("data", Gson().toJson(data.data))//serialize obj to json
-                it.context.startActivity(intent)
+                val dialog=AlertDialog.Builder(it.context).setTitle("Go to details")
+                    .setMessage("View detail of "+data.data.title+"?")
+                    .setPositiveButton("ok"){
+                        dialog, which ->
+                        val intent = Intent(it.context, DetailsActivity::class.java)
+                        intent.putExtra("data", Gson().toJson(data.data))//serialize obj to json
+                        it.context.startActivity(intent)
+                    }.setNegativeButton("Cancel"){
+                        dialog, which ->  dialog.cancel()
+                    }
+                    .create()
+                    dialog.show()
+
+
 
             }
         }
