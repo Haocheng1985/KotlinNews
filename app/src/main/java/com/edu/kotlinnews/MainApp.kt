@@ -22,8 +22,8 @@ class MainApp:Application() {
         super.onCreate()
 
         var ret=Retrofit.Builder().baseUrl(
-//            "https://www.fastmock.site/"
-            "https://www.reddit.com/"
+            "https://www.fastmock.site/"
+//            "https://www.reddit.com/"
         ).addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
