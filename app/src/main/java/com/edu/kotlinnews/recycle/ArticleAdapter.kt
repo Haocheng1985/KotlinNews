@@ -37,8 +37,8 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
             thumbnail = itemView.thumbnail_iv
             itemView.setOnClickListener {
                 Log.e("Adapter", "Item clicked")
-
-                val dialog=AlertDialog.Builder(it.context).setTitle("Go to details")
+                //creat a modal
+               /* val dialog=AlertDialog.Builder(it.context).setTitle("Go to details")
                     .setMessage("View detail of "+data.data.title+"?")
                     .setPositiveButton("ok"){
                         dialog, which ->
@@ -49,7 +49,12 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
                         dialog, which ->  dialog.cancel()
                     }
                     .create()
-                    dialog.show()
+                    dialog.show()*/
+
+                //without a modal
+                val intent = Intent(it.context, DetailsActivity::class.java)
+                intent.putExtra("data", Gson().toJson(data.data))//serialize obj to json
+                it.context.startActivity(intent)
 
 
 

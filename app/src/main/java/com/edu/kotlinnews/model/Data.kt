@@ -13,5 +13,6 @@ data class Data(
     var selftext: String?,
     var title: String,
     var thumbnail: String?,
-    var url: String
+    var url: String,
+    var created:Long
 )

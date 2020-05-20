@@ -18,6 +18,9 @@
         android:textColor="@android:color/white"
         android:gravity="center_vertical"
         android:textStyle="bold"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2"/>
+
+
 
 </LinearLayout>
