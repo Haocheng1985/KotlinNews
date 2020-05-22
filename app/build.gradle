@@ -66,4 +66,8 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'//show image
 
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.8'
+
+
 }

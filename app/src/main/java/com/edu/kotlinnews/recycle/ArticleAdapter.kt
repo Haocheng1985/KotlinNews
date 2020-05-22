@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_article.view.*
 import com.edu.kotlinnews.R
 import com.google.gson.Gson
+import org.apache.commons.text.StringEscapeUtils
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
@@ -63,7 +64,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
 
         fun bind(data: ListItem) {
             this.data = data
-            title.setText(data.data.title)
+            title.text = StringEscapeUtils.unescapeHtml4(data.data.title)
             var img = data.data.thumbnail
             //the ImageView will show depend on if there is thumbnail image
             if (img == null || img.trim().isEmpty()) {

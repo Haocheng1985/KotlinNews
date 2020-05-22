@@ -2,16 +2,19 @@ package com.edu.kotlinnews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.core.text.HtmlCompat
 import com.edu.kotlinnews.model.Data
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.item_article.thumbnail_iv
+import org.apache.commons.text.StringEscapeUtils
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -29,7 +32,7 @@ class DetailsActivity : AppCompatActivity() {
         title = data.title//set title
 
         val dispTitle = supportActionBar!!.customView!!.findViewById<TextView>(R.id.bar_title)!!
-        dispTitle.text = data.title
+        dispTitle.text = StringEscapeUtils.unescapeHtml4(data.title)
         dispTitle.requestFocus()
         dispTitle.isSelected = true
 
@@ -48,7 +51,9 @@ class DetailsActivity : AppCompatActivity() {
             content_tv.text = data.url
             Toast.makeText(this, "No selftext, showing the URL instead", Toast.LENGTH_SHORT).show()
         } else {
-            content_tv.text = data.selftext
+//            Log.e(DetailsActivity::class.java.name,StringEscapeUtils.unescapeHtml4(data.selftext_html))
+            content_tv.text =  HtmlCompat.fromHtml(StringEscapeUtils.unescapeHtml4(data.selftext_html),0)
+//            content_tv.text = data.selftext
         }
     }
 
