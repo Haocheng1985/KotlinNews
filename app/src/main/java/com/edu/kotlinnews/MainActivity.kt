@@ -3,6 +3,7 @@ package com.edu.kotlinnews
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                 val dialog = AlertDialog.Builder(this@MainActivity)
                     .setTitle("Error")
                     .setMessage("Fail to load data. Please check your network.")
-                    .setPositiveButton("ok") { dialog, which -> { dialog.dismiss() } }.create()
+                    .setPositiveButton("ok", DialogInterface.OnClickListener{ dialog, which ->finish()})
                 dialog.show()
             }
 
