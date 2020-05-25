@@ -47,10 +47,11 @@ class MainActivity : AppCompatActivity() {
         val checkfromshare=prefs.getBoolean("ascend",true)
 
 
-        val switcher = findViewById<Switch>(R.id.my_switch)
-        switcher.isChecked = checkfromshare
+//        val switcher = findViewById<Switch>(R.id.my_switch)
+        my_switch.isChecked=checkfromshare
+//        switcher.isChecked = checkfromshare
         switch_text.text
-        if (switcher.isChecked) {
+        if (my_switch.isChecked) {
             switch_text.text = "ascend"
 
         } else {
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 this.onResume()
             }
         }
-        switcher.setOnCheckedChangeListener(listener)
+        my_switch.setOnCheckedChangeListener(listener)
 
 
     }
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                         object : TypeToken<MutableList<ListItem>>() {}.type
                     )//json to obj
                     if(my_switch.isChecked){
-                        list.sortBy { x->x.data.created }
+                        list.sortBy { it.data.created }
                     }else
                     {
                         list.sortByDescending { x->x.data.created }
