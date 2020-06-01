@@ -82,12 +82,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        //set progressDialog to show loading
-//        val progressDialog=ProgressDialog(this)
-//        progressDialog.setTitle("Fetching Data")
-//        progressDialog.setMessage("Loading.....")
-//        progressDialog.setCancelable(false)
-//        progressDialog.show()
+
         article_rv?.visibility = View.GONE
         loading?.visibility = View.VISIBLE
 
@@ -129,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     articleAdapter.data = list//pass data to recycleview
-//                    progressDialog.dismiss()
+
 
                 } else {
                     onFailure(call, RuntimeException("No response"))
